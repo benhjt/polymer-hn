@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>Tests</title>
+
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+  </head>
+  <body>
+    <script>
+      WCT.loadSuites([
+        // Load 'hn-user.html' test suite, using native shadow dom
+        'hn-user.html?dom=shadow',
+        // Load 'hn-user.html' test suite, using shadydom
+        'hn-user.html?wc-shadydom=true',
+        'hn-story-list.html?dom=shadow',
+        'hn-story-list.html?wc-shadydom=true',
+        'hn-story-list-item.html?dom=shadow',
+        'hn-story-list-item.html?wc-shadydom=true'
+      ]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/hn-app.html",
+  "fragments": [
+    "src/hn-story-list.html",
+    "src/hn-story.html",
+    "src/hn-user.html"
+  ],
+  "sources": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "extraDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ]
+  },
+  "builds": [{
+      "name": "bundled",
+      "bundle": true,
+      "js": {"minify": true},
+      "css": {"minify": true},
+      "html": {"minify": true},
+      "addServiceWorker": true
+    }, {
+      "name": "unbundled",
+      "addServiceWorker": true
+    }]
+}

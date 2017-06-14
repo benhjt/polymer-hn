@@ -1,0 +1,51 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<dom-module id="hn-story-list-item">
+  <template>
+    <style>
+      :host {
+        display: block;
+        padding: 20px 30px 20px 30px;
+        border-bottom: 1px solid #b6b6b6;
+      }
+
+      .story--link {
+        color: #212121;
+        text-decoration: none;
+      }
+
+      .story--link:visited {
+       color: #727272;
+      }
+    </style>
+
+    <div class="story">
+      <div class="story--title">
+        <a href="[[story.url]]" class="story--link" target="_blank">[[storyTitle]]</a>
+      </div>
+      <small class="story--details">
+        [[story.points]] points by <a href="/user/[[story.user]]">[[story.user]]</a> [[story.time_ago]] | <a href="/story/[[story.id]]">[[story.comments_count]] comments</a>
+      </small>
+    </div>
+  </template>
+  <script>
+    class HnStoryListItem extends Polymer.Element {
+      static get is() { return "hn-story-list-item"; }
+      static get properties() {
+        return {
+          story: Object,
+          storyTitle: {
+            type: String,
+            computed: '_buildStoryTitle(story)'
+          }
+        }
+      }
+
+      _buildStoryTitle(story) {
+        return story.title + (story.domain ? " (" + story.domain + ")" : "");
+      }
+    };
+
+    window.customElements.define(HnStoryListItem.is, HnStoryListItem);
+  </script>
+</dom-module>

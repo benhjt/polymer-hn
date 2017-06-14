@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>hn-user</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <!-- Import the element to test -->
+    <link rel="import" href="../src/hn-user.html">
+  </head>
+  <body>
+    <test-fixture id="BasicView">
+      <template>
+        <hn-user></hn-user>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('hn-user tests', function () {
+        suite('testing generation of link', function () {
+          test('Should return a valid link', function () {
+            const hnUser = fixture('BasicView');
+            const link = hnUser._hnLink("submitted", 7563);
+            assert.equal(link, "https://news.ycombinator.com/submitted?id=7563");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>hn-story-list</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <!-- Import the element to test -->
+    <link rel="import" href="../src/hn-story-list.html">
+  </head>
+  <body>
+    <test-fixture id="BasicView">
+      <template>
+        <hn-story-list></hn-story-list>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('hn-story-list tests', function () {
+        suite('testing computing of next page', function () {
+          test('Should return the page 2 when current page is 1', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computeNextPage("1");
+            assert.equal(nextPage, 2);
+          });
+
+          test('Should return the page 3 when current page is 2', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computeNextPage("2");
+            assert.equal(nextPage, 3);
+          });
+
+          test('Should return the page 35 when current page is 34', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computeNextPage("34");
+            assert.equal(nextPage, 35);
+          });
+
+          test('Should return the page 2 when current page is undefined', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computeNextPage(undefined);
+            assert.equal(nextPage, 2);
+          });
+        });
+
+        suite('testing computing of previous page', function () {
+          test('Should return the page 1 when current page is 2', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computePrevPage("2");
+            assert.equal(nextPage, 1);
+          });
+
+          test('Should return the page 2 when current page is 3', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computePrevPage("3");
+            assert.equal(nextPage, 2);
+          });
+
+          test('Should return the page 34 when current page is 35', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computePrevPage("35");
+            assert.equal(nextPage, 34);
+          });
+
+          test('Should return the page 2 when current page is undefined', function () {
+            const hnStoryList = fixture('BasicView');
+            const nextPage = hnStoryList._computePrevPage(undefined);
+            assert.equal(nextPage, 1);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

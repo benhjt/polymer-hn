@@ -1,0 +1,69 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="hn-user">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <iron-ajax
+      auto
+      url="https://node-hnapi.herokuapp.com/user/{{userId}}"
+      handle-as="json"
+      last-response="{{user}}"
+    ></iron-ajax>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>User:</td>
+          <td>[[user.id]]</td>
+        </tr>
+        <tr>
+          <td>Created:</td>
+          <td>[[user.created]]</td>
+        </tr>
+        <tr>
+          <td>Karma</td>
+          <td>[[user.karma]]</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="about" hidden$="[[!user.about]]" inner-h-t-m-l="[[user.about]]"></div>
+    <div class="links">
+      <a href$="[[_hnLink('submitted', user.id)]]" target="_blank">submissions</a>
+      |
+      <a href$="[[_hnLink('threads', user.id)]]" target="_blank">comments</a>
+      |
+      <a href$="[[ _hnLink('favorites', user.id)]]" target="_blank">favorites</a>
+    </div>
+  </template>
+  <script>
+    class HnUser extends Polymer.Element {
+      static get is() { return "hn-user"; }
+      static get properties() {
+        return {
+          subroute: Object,
+          userId: {
+            type: String,
+            computed: '_getUserId(subroute)'
+          },
+          user: Object
+        }
+      }
+
+      _getUserId(subroute) {
+        return subroute && subroute.path ? subroute.path.substr(1) : '';
+      }
+
+      _hnLink(type, id) {
+        return `https://news.ycombinator.com/${type}?id=${id}`;
+      }
+    };
+
+    window.customElements.define(HnUser.is, HnUser);
+  </script>
+</dom-module>

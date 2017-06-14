@@ -1,0 +1,48 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="hn-comment.html">
+
+<dom-module id="hn-story">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <iron-ajax
+      auto
+      url="https://node-hnapi.herokuapp.com/item/{{itemId}}"
+      handle-as="json"
+      last-response="{{story}}"
+    ></iron-ajax>
+
+    <h1>[[story.title]]</h1>
+
+    <template is="dom-repeat" items="[[story.comments]]" as="comment">
+      <hn-comment comment="[[comment]]"></hn-comment>
+    </template>
+  </template>
+  <script>
+    class HnStory extends Polymer.Element {
+      static get is() { return "hn-story"; }
+      static get properties() {
+        return {
+          subroute: Object,
+          itemId: {
+            type: String,
+            computed: '_getStoryId(subroute)'
+          },
+          story: Object
+        };
+      }
+
+      _getStoryId(subroute) {
+        return subroute && subroute.path ? subroute.path.substr(1) : '';
+      }
+    };
+
+    window.customElements.define(HnStory.is, HnStory);
+  </script>
+</dom-module>

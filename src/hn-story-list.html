@@ -1,0 +1,69 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+
+<!-- iron elements -->
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<!-- our custom elements -->
+<link rel="import" href="hn-story-list-item.html">
+
+<dom-module id="hn-story-list">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .pagination {
+        @apply --layout-horizontal;
+        @apply --layout-justified;
+        padding-top: 16px;
+      }
+    </style>
+
+    <iron-ajax
+      auto
+      url="https://node-hnapi.herokuapp.com/news?page={{page}}"
+      handle-as="json"
+      last-response="{{stories}}"
+    ></iron-ajax>
+
+    <template is="dom-repeat" items="{{stories}}" as="story">
+      <hn-story-list-item story="{{story}}"></hn-story-list-item>
+    </template>
+
+    <div class="pagination">
+      <a href="/story-list/[[_computePrevPage(page)]]" class="pagination__link">◀ Previous</a>
+      <span>Page {{page}}</span>
+      <a href="/story-list/[[_computeNextPage(page)]]" class="pagination__link">Next ▶</a>
+    </div>
+  </template>
+  <script>
+    class HnStoryList extends Polymer.Element {
+      static get is() { return "hn-story-list"; }
+      static get properties() {
+        return {
+          subroute: Object,
+          page: {
+            type: Number,
+            computed: '_getPage(subroute)'
+          }
+        };
+      }
+
+      _computeNextPage(page) {
+        return (parseInt(page, 10) || 1) + 1
+      }
+
+      _computePrevPage(page) {
+        return ((parseInt(page, 10) || 2) - 1) || 1;
+      }
+
+      _getPage(subroute) {
+        return subroute && subroute.path ? subroute.path.substr(1) : 1;
+      }
+    };
+
+    window.customElements.define(HnStoryList.is, HnStoryList);
+  </script>
+</dom-module>

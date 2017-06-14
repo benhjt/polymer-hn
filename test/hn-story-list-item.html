@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>hn-story-list-item</title>
+
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../bower_components/web-component-tester/browser.js"></script>
+
+    <!-- Import the element to test -->
+    <link rel="import" href="../src/hn-story-list-item.html">
+  </head>
+  <body>
+    <test-fixture id="BasicView">
+      <template>
+        <hn-story-list-item></hn-story-list-item>
+      </template>
+    </test-fixture>
+
+
+    <script>
+      suite('hn-user tests', function () {
+        suite('testing _buildStoryTitle', function () {
+          test('Title should include the name and domain', function () {
+            const hnStoryListItem = fixture('BasicView');
+            const story = {
+              title: "Polymer 2.0 released!",
+              domain: "polymer-project.org"
+            };
+
+            const title = hnStoryListItem._buildStoryTitle(story);
+            assert.equal(title, "Polymer 2.0 released! (polymer-project.org)");
+          });
+
+          test('Title should just be the title if there is no domain', function () {
+            const hnStoryListItem = fixture('BasicView');
+            const story = {
+              title: "Polymer 2.0 released!"
+            };
+
+            const title = hnStoryListItem._buildStoryTitle(story);
+            assert.equal(title, "Polymer 2.0 released!");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
