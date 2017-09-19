@@ -39,7 +39,10 @@
       static get is() { return "hn-comment"; }
       static get properties() {
         return {
-          comment: Object
+          comment: Object,
+          collapsed: Boolean,
+          _collapseTitle: String,
+          _collapseButton: String
         }
       }
 
