@@ -26,11 +26,11 @@
     </table>
     <div class="about" hidden$="[[!user.about]]" inner-h-t-m-l="[[user.about]]"></div>
     <div class="links">
-      <a href$="[[_hnLink('submitted', user.id)]]" target="_blank">submissions</a>
+      <a href$="[[_hnLink('submitted', user.id)]]" target="_blank" rel="noopener">submissions</a>
       |
-      <a href$="[[_hnLink('threads', user.id)]]" target="_blank">comments</a>
+      <a href$="[[_hnLink('threads', user.id)]]" target="_blank" rel="noopener">comments</a>
       |
-      <a href$="[[ _hnLink('favorites', user.id)]]" target="_blank">favorites</a>
+      <a href$="[[ _hnLink('favorites', user.id)]]" target="_blank" rel="noopener">favorites</a>
     </div>
   </template>
   <script>
