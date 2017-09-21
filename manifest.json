@@ -1,7 +1,7 @@
 {
   "name": "Hacker news",
   "short_name": "Hacker news",
-  "start_url": "/?homescreen=1",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#FF5722",
   "background_color": "#FAFAFA",
