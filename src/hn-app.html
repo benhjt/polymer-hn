@@ -1,18 +1,14 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
 <!-- iron elements -->
-<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <!-- app elements -->
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
 <link rel="import" href="../bower_components/app-route/app-location.html">
 <link rel="import" href="../bower_components/app-route/app-route.html">
 <!-- our custom elements -->
 <link rel="lazy-import" href="hn-story-list.html">
 <link rel="lazy-import" href="hn-story.html">
 <link rel="lazy-import" href="hn-user.html">
-<link rel="import" href="hn-icons.html">
 
 <dom-module id="hn-app">
   <template>
@@ -21,35 +17,6 @@
         display: block;
         height: 100%;
         margin: 0;
-      }
-
-      app-toolbar {
-        background: #FF5722;
-        color: #fff;
-      }
-
-      div[main-title] {
-        @apply --layout-flex-auto;
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        @apply --layout-center-justified;
-        text-decoration: none;
-        color: white;
-        margin-right: 40px;
-      }
-
-      .title {
-        margin: 0;
-        text-align: center;
-        display: inline;
-        margin-left: 20px;
-        margin-right: 20px;
-        transition: opacity 0.2s;
-      }
-
-      iron-icon {
-        width: 30px;
-        height: 30px;
       }
     </style>
 
@@ -60,12 +27,6 @@
       data="{{routeData}}"
       tail="{{subroute}}"></app-route>
 
-    <app-toolbar>
-      <div main-title>
-        <iron-icon icon="hn-icons:whatshot"></iron-icon>
-        <span class="title">Hacker news</span>
-      </div>
-    </app-toolbar>
     <iron-pages
         selected="[[page]]"
         attr-for-selected="name"
