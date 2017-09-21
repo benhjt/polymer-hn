@@ -1,5 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="hn-user">
   <template>
@@ -8,13 +7,6 @@
         display: block;
       }
     </style>
-
-    <iron-ajax
-      auto
-      url="https://node-hnapi.herokuapp.com/user/{{userId}}"
-      handle-as="json"
-      last-response="{{user}}"
-    ></iron-ajax>
 
     <table>
       <tbody>
@@ -49,10 +41,22 @@
           subroute: Object,
           userId: {
             type: String,
-            computed: '_getUserId(subroute)'
+            computed: '_getUserId(subroute)',
+            observer: '_doRequest'
           },
           user: Object
         }
+      }
+
+      _doRequest(userId) {
+        fetch('https://node-hnapi.herokuapp.com/user/' + userId).then(response => {
+          return response.json();
+        }).then(json => {
+          this.stories = json;
+          return;
+        }).catch(error => {
+          // swallow
+        });
       }
 
       _getUserId(subroute) {

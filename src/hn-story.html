@@ -1,6 +1,4 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
-
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="hn-comment.html">
 
 <dom-module id="hn-story">
@@ -10,13 +8,6 @@
         display: block;
       }
     </style>
-
-    <iron-ajax
-      auto
-      url="https://node-hnapi.herokuapp.com/item/{{itemId}}"
-      handle-as="json"
-      last-response="{{story}}"
-    ></iron-ajax>
 
     <h1>[[story.title]]</h1>
 
@@ -32,10 +23,22 @@
           subroute: Object,
           itemId: {
             type: String,
-            computed: '_getStoryId(subroute)'
+            computed: '_getStoryId(subroute)',
+            observer: '_doRequest'
           },
           story: Object
         };
+      }
+
+      _doRequest(itemId) {
+        fetch('https://node-hnapi.herokuapp.com/item/' + itemId).then(response => {
+          return response.json();
+        }).then(json => {
+          this.stories = json;
+          return;
+        }).catch(error => {
+          // swallow
+        });
       }
 
       _getStoryId(subroute) {

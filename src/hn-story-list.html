@@ -1,9 +1,5 @@
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 
-<!-- iron elements -->
-<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-
 <!-- our custom elements -->
 <link rel="import" href="hn-story-list-item.html">
 
@@ -15,18 +11,11 @@
       }
 
       .pagination {
-        @apply --layout-horizontal;
-        @apply --layout-justified;
         padding-top: 16px;
+        display: flex;
+        justify-content: space-between;
       }
     </style>
-
-    <iron-ajax
-      auto
-      url="https://node-hnapi.herokuapp.com/news?page={{page}}"
-      handle-as="json"
-      last-response="{{stories}}"
-    ></iron-ajax>
 
     <template is="dom-repeat" items="{{stories}}" as="story">
       <hn-story-list-item story="{{story}}"></hn-story-list-item>
@@ -46,9 +35,22 @@
           subroute: Object,
           page: {
             type: Number,
-            computed: '_getPage(subroute)'
-          }
+            computed: '_getPage(subroute)',
+            observer: '_doRequest'
+          },
+          stories: Array
         };
+      }
+
+      _doRequest(page) {
+        fetch('https://node-hnapi.herokuapp.com/news?page=' + page).then(response => {
+          return response.json();
+        }).then(json => {
+          this.stories = json;
+          return;
+        }).catch(error => {
+          // swallow
+        });
       }
 
       _computeNextPage(page) {
