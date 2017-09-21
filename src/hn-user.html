@@ -49,14 +49,16 @@
       }
 
       _doRequest(userId) {
-        fetch('https://node-hnapi.herokuapp.com/user/' + userId).then(response => {
-          return response.json();
-        }).then(json => {
-          this.user = json;
-          return;
-        }).catch(error => {
-          // swallow
-        });
+        if (userId) {
+          fetch('https://node-hnapi.herokuapp.com/user/' + userId).then(response => {
+            return response.json();
+          }).then(json => {
+            this.user = json;
+            return;
+          }).catch(error => {
+            // swallow
+          });
+        }
       }
 
       _getUserId(subroute) {
