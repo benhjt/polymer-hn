@@ -8,6 +8,7 @@
     <style>
       :host {
         display: block;
+        padding: 1rem;
       }
 
       .pagination {
@@ -15,10 +16,18 @@
         display: flex;
         justify-content: space-between;
       }
+
+      .pagination__link {
+        text-decoration: none;
+      }
+
+      .pagination__link:visited {
+        color: #000;
+      }
     </style>
 
     <template is="dom-repeat" items="{{stories}}" as="story">
-      <hn-story-list-item story="{{story}}"></hn-story-list-item>
+      <hn-story-list-item story="{{story}}" index="[[_computeIndex(page, index)]]"></hn-story-list-item>
     </template>
 
     <div class="pagination">
@@ -29,6 +38,12 @@
   </template>
   <script>
     class HnStoryList extends Polymer.Element {
+      constructor() {
+        super();
+
+        this.pageSize = 30;
+      }
+
       static get is() { return "hn-story-list"; }
       static get properties() {
         return {
@@ -61,6 +76,10 @@
 
       _computePrevPage(page) {
         return ((parseInt(page, 10) || 2) - 1) || 1;
+      }
+
+      _computeIndex(page, index) {
+        return 30 * (page - 1) + index + 1;
       }
 
       _getPage(subroute) {

@@ -5,27 +5,41 @@
     <style>
       :host {
         display: block;
-        padding: 20px 30px 20px 30px;
-        border-bottom: 1px solid #b6b6b6;
+        border-bottom: 1px solid #eeeeee;
       }
 
-      .story--link {
+      .story {
+        display: flex;
+      }
+
+      .story__index {
+        align-self: center;
+        font-weight: bold;
+        margin-right: 15px;
+        min-width: 1em;
+        text-align: right;
+      }
+
+      .story__link {
         color: #212121;
         text-decoration: none;
       }
 
-      .story--link:visited {
+      .story__link:visited {
        color: #727272;
       }
     </style>
 
     <div class="story">
-      <div class="story--title">
-        <a href="[[story.url]]" class="story--link" target="_blank" rel="noopener">[[storyTitle]]</a>
+      <span class="story__index">[[index]]</span>
+      <div class="story__info">
+        <div class="story__title">
+          <a href="[[story.url]]" class="story__link" target="_blank" rel="noopener">[[storyTitle]]</a>
+        </div>
+        <small class="story__details">
+          [[story.points]] points by <a href="/user/[[story.user]]">[[story.user]]</a> [[story.time_ago]] | <a href="/story/[[story.id]]">[[story.comments_count]] comments</a>
+        </small>
       </div>
-      <small class="story--details">
-        [[story.points]] points by <a href="/user/[[story.user]]">[[story.user]]</a> [[story.time_ago]] | <a href="/story/[[story.id]]">[[story.comments_count]] comments</a>
-      </small>
     </div>
   </template>
   <script>
@@ -33,6 +47,7 @@
       static get is() { return "hn-story-list-item"; }
       static get properties() {
         return {
+          index: Number,
           story: Object,
           storyTitle: {
             type: String,

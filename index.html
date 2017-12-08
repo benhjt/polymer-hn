@@ -67,6 +67,23 @@
         padding: 0;
         text-align: center;
       }
+
+      .loader {
+        border: 8px solid #bdbdbd; /* Light grey */
+        border-top: 8px solid #E64A19; /* Blue */
+        border-radius: 50%;
+        width: 65px;
+        height: 65px;
+        animation: spin 2s linear infinite;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
     </style>
   </head>
   <body>
@@ -76,7 +93,9 @@
       </svg>
       <h1 class="header__title">Hacker news</h1>
     </header>
-    <hn-app></hn-app>
+    <hn-app>
+      <div class="loader"></div>
+    </hn-app>
 
     <!-- Load webcomponents-loader.js to check and load any polyfills your browser needs -->
     <script src="bower_components/webcomponentsjs/webcomponents-loader.js"></script>
