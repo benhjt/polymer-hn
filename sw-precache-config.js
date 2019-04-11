@@ -1,10 +1,12 @@
-/* eslint-env node */
-
 module.exports = {
   staticFileGlobs: [
-    '/index.html',
-    '/manifest.json',
-    '/bower_components/webcomponentsjs/*',
+    'src/**/*',
+    'manifest.json'
   ],
-  navigateFallback: 'index.html'
+  runtimeCaching: [
+    {
+      urlPattern: /\/@webcomponents\/webcomponentsjs\//,
+      handler: 'fastest'
+    }
+  ]
 };

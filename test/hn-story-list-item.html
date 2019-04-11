@@ -6,11 +6,11 @@
 
     <title>hn-story-list-item</title>
 
-    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
     <!-- Import the element to test -->
-    <link rel="import" href="../src/hn-story-list-item.html">
+    <script type="module" src="../src/hn-story-list-item.js"></script>
   </head>
   <body>
     <test-fixture id="BasicView">
@@ -25,22 +25,22 @@
           test('Title should include the name and domain', function () {
             const hnStoryListItem = fixture('BasicView');
             const story = {
-              title: "Polymer 2.0 released!",
+              title: "Polymer 3.0 released!",
               domain: "polymer-project.org"
             };
 
             const title = hnStoryListItem._buildStoryTitle(story);
-            assert.equal(title, "Polymer 2.0 released! (polymer-project.org)");
+            assert.equal(title, "Polymer 3.0 released! (polymer-project.org)");
           });
 
           test('Title should just be the title if there is no domain', function () {
             const hnStoryListItem = fixture('BasicView');
             const story = {
-              title: "Polymer 2.0 released!"
+              title: "Polymer 3.0 released!"
             };
 
             const title = hnStoryListItem._buildStoryTitle(story);
-            assert.equal(title, "Polymer 2.0 released!");
+            assert.equal(title, "Polymer 3.0 released!");
           });
         });
       });

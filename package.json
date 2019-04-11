@@ -1,15 +1,28 @@
 {
-  "name": "polymer-starter-kit",
-  "license": "BSD-3-Clause",
-  "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-google": "^0.7.0",
-    "eslint-plugin-html": "^2.0.0"
-  },
+  "name": "polymer-hacker-news",
+  "version": "1.0.0",
+  "description": "A Polymer powered implementation of Hacker News",
+  "author": "benhjt <benhjt@users.noreply.github.com>",
+  "private": true,
+  "repository": "benhjt/polymer-hn",
   "scripts": {
-    "lint": "npm run lint:javascript",
-    "lint:javascript": "eslint . --ext js,html --ignore-path .gitignore",
+    "start": "polymer serve",
+    "build": "polymer build",
+    "lint": "polymer lint",
     "test": "polymer test",
     "test:integration": "polymer build # test that psk builds without error with the CLI"
+  },
+  "dependencies": {
+    "@polymer/app-route": "^3.0.2",
+    "@polymer/iron-pages": "^3.0.1",
+    "@polymer/polymer": "^3.2.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0"
+  },
+  "devDependencies": {
+    "polymer-cli": "^1.9.8",
+    "wct-browser-legacy": "^1.0.2"
+  },
+  "engines": {
+    "node": ">=8.0"
   }
 }

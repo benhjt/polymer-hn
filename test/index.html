@@ -6,19 +6,15 @@
 
     <title>Tests</title>
 
-    <script src="../bower_components/web-component-tester/browser.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
   </head>
   <body>
     <script>
       WCT.loadSuites([
         // Load 'hn-user.html' test suite, using native shadow dom
-        'hn-user.html?dom=shadow',
-        // Load 'hn-user.html' test suite, using shadydom
-        'hn-user.html?wc-shadydom=true',
-        'hn-story-list.html?dom=shadow',
-        'hn-story-list.html?wc-shadydom=true',
-        'hn-story-list-item.html?dom=shadow',
-        'hn-story-list-item.html?wc-shadydom=true'
+        'hn-user.html',
+        'hn-story-list.html',
+        'hn-story-list-item.html'
       ]);
     </script>
   </body>
